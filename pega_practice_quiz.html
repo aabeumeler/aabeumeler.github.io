@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pega Practice Quiz</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .quiz-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        opacity: 1;
+        font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        background: linear-gradient(to right, rgb(2, 121, 2), #4ebe52 ) left;
+        background-size: 200% 100%;
+        transition:all .2s ease;
+      }
+
+      button:hover {
+        /* background-color: #45a049; */
+        background-position: right;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        transition:all .4s ease;
+      }
+
+      button:active {
+        background: linear-gradient(to bottom, #4ebe52, rgb(2, 121, 2)) top;
+        background-size: 200% 100%;
+        box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        transition:all .1s ease;
+      }
+
+      button.hidden {
+        display: none;
+      }
+
+      #results {
+        margin-top: 20px;
+      }
+
+      .choice {
+        display: block;
+        text-align: left;
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .choice label {
+        font-size: 18px;
+      }
+
+      .choice.correct {
+        background-color: #c8e6c9; /* Light green background for correct answer */
+      }
+
+      .choice.incorrect {
+        background-color: #ffccbc; /* Light red background for incorrect answer */
+      }
+
+      .choice.selected {
+        font-weight: bold;
+      }
+
+      input {
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      .question {
+        text-align: left;
+        margin-bottom: 20px;
+      }
+
+      .question-number {
+        margin-bottom: 16px;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="quiz-container">
+      <h1>Pega Practice Quiz</h1>
+      <div id="quiz">
+        <!-- Quiz content will be inserted here dynamically using JavaScript -->
+      </div>
+      <button id="next-question" class="hidden">Next Question</button>
+      <button id="submit" class="hidden">Submit Quiz</button>
+      <div id="results">
+        <!-- Results will be displayed here after the quiz is submitted -->
+      </div>
+      <button id="restart" class="hidden">Restart Quiz</button>
+    </div>
+    <script>
+      const quizData = [
+        {
+          question:
+            "U+ Bank offers two credit cards to its customers: the Cold Card and the Silver Card. The bank wants the annual fee property of the credit cards to be dynamic based on the customer lifetime value property. \n\nThat is, customers with customer lifetime value greater than 65 receive a discount of 20% on the annual fee. \n\nAs a Strategy Designer, how do you implement this requirement in the decision strategy?",
+          choices: [
+            "By using the When rule to set the annual fee",
+            "By using the When rule to set the customer value",
+            "By using the If function to set the customer value",
+            "By using the If function to set the annual fee",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "U+ Bank wants to dynamically set the annual fee of its credit cards based on customer lifetime value. Which component do you use to implement this requirement?",
+          choices: ["Set Property", "Filter", "Group By", "Switch"],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Selection components provide the ability to ________________.",
+          choices: [
+            "import results from other strategies",
+            "make calculations based upon a list of propositions",
+            "filter propositions based on priority and relevance",
+            "choose between a sales and a service proposition",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "After launching a new product, the delta mode in Visual Business Director could show _______.",
+          choices: [
+            "the volume of the existing products",
+            "the date when the product was introduced",
+            "the volume difference between the new product and existing products",
+            "a green shape for the product added",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "One of the purposes of the Interaction History decision component is to ___________.",
+          choices: [
+            "capture all interactions with the customer",
+            "verify if a customer is eligible for an offer",
+            "retrieve all proposition properties",
+            "determine of a proposition has been offered before",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "When a customer is offered a proposition he has already accepted, this is because____________.",
+          choices: [
+            "the propositions are filtered based on eligibility",
+            "there is no filter for previously accepted offers in the strategy",
+            "the customer intent was captured incorrectly",
+            "the strategy uses interaction history to exclude previously accepted files",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "In a decision strategy, to remove propositions based on the current month, you use a _________.",
+          choices: [
+            "Calendar component",
+            "Filter component",
+            "date strategy property",
+            "calendar strategy property",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            'What does a solid arrow from a "Set Property" component to a "Filter" component mean?',
+          choices: [
+            'There is a one-to-one relationship between a "Set Property" and a "Filter" component.',
+            'A property from the "Set Property" component is referenced by the "Filter" component.',
+            'To evaluate the "Set Property" component, the "Filter" component is evaluated first.',
+            'Information from the "Set Property" component is copied over to the "Filter" component.',
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "In a decision strategy, in order to select the proposition with the highest propensity, you use a _______________.",
+          choices: [
+            "Switch component, and sort propensity from highest to lowest",
+            "Prioritize component, and sort propensity from lowest to highest",
+            "Prioritize component, and sort propensity from highest to lowest",
+            "Switch component, and sort propensity from lowest to highest",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "To run a delta report in the Visual Business Director, a minimum of two___________ are required.",
+          choices: [
+            "data sources",
+            "input definitions",
+            "propositions",
+            "strategies",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "To calculate the average margin of four Propositions, you must use _____________.",
+          choices: [
+            "one Group By component",
+            "four Group By components",
+            "four Set Property components",
+            "one Set Property component",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "In a strategy, how can you check if a customer rejected a proposition?",
+          choices: [
+            'Check if ".pyRejected" value is equal to "True".',
+            'Check if ".pyOutcome" value is equal to "Rejected".',
+            'Check if ".pyResponse" value is equal to "Rejected".',
+            'Check if ".pyResult" value is equal to "Rejected".',
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question: "The Prioritize component sorts offers in _______________.",
+          choices: [
+            "ascending order only",
+            "descending order only",
+            "random order",
+            "ascending or descending order",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "In a strategy, the propositions are imported using a(n) _____________.",
+          choices: [
+            "Data Import component",
+            "Offer Data component",
+            "Import Data component",
+            "Proposition Data component",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "What is the name of the property that is automatically recomputed for each decision component?",
+          choices: ["Order", "Propensity", "Priority", "Rank"],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Arbitration components provide the ability to _______________.",
+          choices: [
+            "arbitrate between different business issues",
+            "make calculations based upon a list of propositions",
+            "filter propositions based on priority and relevance",
+            "choose between propositions",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "To access a property from an unconnected component, you use the ____________.",
+          choices: [
+            "dot-property value directly",
+            "component-dot-property construct",
+            "property value",
+            "customer dot-property construct",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "U+ Bank a Next-Best-Action decision strategy to determine the credit rating of its customers. A scorecard model determines the customer credit score.The business requirement is to determine the credit card rating based on the following table:\n\nAge          Credit Score          Credit Rating\n<18          100                        3\n>18          150                        2\n>25          200                        1\n\nAs a Strategy Designer, how do you implement the business requirement?",
+          choices: [
+            "Configure the scorecard model to pass the credit score to the strategy",
+            "Add a decision table to the strategy and configure it to reference the scorecard model",
+            "Add a decision table to the strategy and pass the credit score as the parameter",
+            "Add the credit rating rules in the Results tab of the scorecard component",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "To use Product Holdings information in your strategy, which of the following components do you use?",
+          choices: [
+            "Decision Parameters",
+            "Property Set",
+            "Data Import",
+            "Product Holdings",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question: "Visual Business Director can be used to __________.",
+          choices: [
+            "import an inspect an external dataset",
+            "compare two datasets",
+            "predict customer behavior",
+            "inspect interactions of a single customer",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "The number of results returned by an Interaction History component can be narrowed down based on _______________.",
+          choices: [
+            "the customer lifetime value",
+            "the age of the customer",
+            "a time period",
+            "the total count of propositions in a given channel",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "U+ Bank purchased Pega Customer Decision Hub to enhance the customer experience in their branches. The new application they have built has a Next-Best-Action panel to guide the branch advisor. \n\nWhen does the Next-Best-Action panel for the branch advisor need to be refreshed during the conversation with the customer?",
+          choices: [
+            "Every time new information about the customer is received",
+            "Once, after the customer reason to visit the branch is captured in the system",
+            "Every second to ensure timely recommendations",
+            "First time, after looking up the customer in the system to ensure consistency during the visit",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "To which types of decisions can Customer Decision Hub be applied?",
+          choices: [
+            "Determining why response rates for a campaign in one region are below average",
+            "Determining how to optimize the product portfolio to increase market share",
+            "Determining how to retain a customer and what budget we should spend",
+            "Determining the cause of a customer's problem",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "A mobile company wants to introduce new data plans to target students. As a strategy designer, you create new data plan offers. \n\nWhich offer attribute do you need to set to make the offer available in the contact center?",
+          choices: ["Evidence", "KeyCode", "Channel", "Active"],
+          correctAnswer: 3,
+        },
+        {
+          question: "Two results of an adaptive model are ________________.",
+          choices: [
+            "Priority and Evidence",
+            "Propensity and Rank",
+            "Priority and Propensity",
+            "Propensity and Performance",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "A Text Analyzer performs natural language processing on a piece of text. It then produces a structured output, which can be analyzed using reports.\n\nWhat type of text analysis does the text analyzer perform?",
+          choices: [
+            "Entity extraction",
+            "Word analysis",
+            "Word count",
+            "Cross reference analysis",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Which value is output by an Adaptive Model?",
+          choices: ["Score", "Behavior", "Performance", "Lift"],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "In order to associate an Adaptive Model with each proposition, you need to ____________.",
+          choices: [
+            "link all propositions with an Adaptive Model decision component",
+            "create an Adaptive Model rule for each proposition",
+            "capture the customer's response",
+            "define the Adaptive Model instances in Adaptive Decision Manager",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question: "An adaptive model captures outcomes of ____________.",
+          choices: [
+            "only negative customer responses",
+            "similar propositions",
+            "a subset of customer responses",
+            "only positive customer responses",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "A company wants to capture the sentiment of relevant Twitter messages to allow its customer service representatives to concentrate only on the negative ones.\n\nSentiment refers to the general attitude of the author towards a subject and can be ___________.",
+          choices: ["Defensive", "Absent", "Positive", "Offensive"],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "Which is the most accurate description of proactive retention? Proactive Retention ___________.",
+          choices: [
+            "anticipates potential customer churn",
+            "simplifies the process of retaining customers",
+            "enables business to respond to customers when they contact a call center",
+            "enables the business to reduce the number of credit risk customers",
+          ],
+          correctAnswer: 0,
+        },
+        // Add more questions here using the same format if needed
+      ];
+
+      const quizContainer = document.getElementById("quiz");
+      const resultsContainer = document.getElementById("results");
+      const submitButton = document.getElementById("submit");
+      const nextButton = document.getElementById("next-question");
+      const restartButton = document.getElementById("restart");
+
+      let currentQuestionIndex = 0;
+      let userAnswers = [];
+      let isAnswerSelected = false;
+
+      // Function to display a question with answer choices
+      function displayQuestion() {
+        quizContainer.innerHTML = "";
+        const currentQuestion = quizData[currentQuestionIndex];
+
+        const questionNumber = document.createElement("div");
+        questionNumber.classList.add("question-number");
+        questionNumber.innerText = `Question ${currentQuestionIndex + 1}`;
+        quizContainer.appendChild(questionNumber);
+
+        const questionElement = document.createElement("div");
+        questionElement.classList.add("question");
+        questionElement.innerText = currentQuestion.question;
+        quizContainer.appendChild(questionElement);
+
+        currentQuestion.choices.forEach((choice, index) => {
+          const choiceContainer = document.createElement("div");
+          choiceContainer.classList.add("choice");
+
+          const choiceInput = document.createElement("input");
+          choiceInput.type = "radio";
+          choiceInput.name = "answer";
+          choiceInput.value = index;
+          choiceInput.id = `choice${index}`;
+          choiceInput.addEventListener("click", () => selectAnswer(index));
+
+          const choiceLabel = document.createElement("label");
+          choiceLabel.htmlFor = `choice${index}`;
+          choiceLabel.innerText = choice;
+
+          choiceContainer.appendChild(choiceInput);
+          choiceContainer.appendChild(choiceLabel);
+          quizContainer.appendChild(choiceContainer);
+        });
+      }
+
+      // Function to handle answer selection
+      function selectAnswer(index) {
+        if (isAnswerSelected) return;
+        isAnswerSelected = true;
+
+        const currentQuestion = quizData[currentQuestionIndex];
+        userAnswers[currentQuestionIndex] = index;
+
+        const choices = document.querySelectorAll(".choice");
+        choices.forEach((choice, i) => {
+          if (i === index) {
+            choice.classList.add("selected");
+            if (index === currentQuestion.correctAnswer) {
+              choice.classList.add("correct");
+            } else {
+              choice.classList.add("incorrect");
+            }
+          }
+          if (
+            i === currentQuestion.correctAnswer &&
+            index !== currentQuestion.correctAnswer
+          ) {
+            choice.classList.add("correct");
+          }
+        });
+
+        nextButton.classList.remove("hidden");
+      }
+
+      // Function to show the next question or end the quiz
+      nextButton.addEventListener("click", () => {
+        currentQuestionIndex++;
+        isAnswerSelected = false;
+        if (currentQuestionIndex < quizData.length) {
+          displayQuestion();
+          nextButton.classList.add("hidden");
+        } else {
+          showResults();
+          nextButton.classList.add("hidden");
+          submitButton.classList.remove("hidden");
+        }
+      });
+
+      // Function to show the results at the end of the quiz
+      function showResults() {
+        let correctAnswers = 0;
+        resultsContainer.innerHTML = "<h2>Quiz Results</h2>";
+        quizData.forEach((question, index) => {
+          const userAnswer = userAnswers[index];
+          const correctAnswer = question.correctAnswer;
+          const result =
+            userAnswer === correctAnswer
+              ? "Correct"
+              : `Incorrect. Correct Answer: ${question.choices[correctAnswer]}`;
+          resultsContainer.innerHTML += `<p>Question ${index + 1}: ${
+            question.question
+          } <br> Your answer: ${question.choices[userAnswer]} - ${result}</p>`;
+          if (userAnswer === correctAnswer) correctAnswers++;
+        });
+        const score = ((correctAnswers / quizData.length) * 100).toFixed(2);
+        resultsContainer.innerHTML += `<h3>Score: ${correctAnswers}/${quizData.length} (${score}%)</h3>`;
+        restartButton.classList.remove("hidden");
+      }
+
+      // Restart the quiz
+      restartButton.addEventListener("click", () => {
+        currentQuestionIndex = 0;
+        userAnswers = [];
+        isAnswerSelected = false;
+        resultsContainer.innerHTML = "";
+        restartButton.classList.add("hidden");
+        submitButton.classList.add("hidden");
+        displayQuestion();
+      });
+
+      // Display the first question on page load
+      displayQuestion();
+    </script>
+  </body>
+</html>
