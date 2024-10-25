@@ -52,7 +52,7 @@
 
       button:active {
         background: linear-gradient(to bottom, #4ebe52, rgb(2, 121, 2)) top;
-        background-size: 200% 100%;
+        background-size: 210% 110%;
         box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
         transition:all .1s ease;
       }
@@ -63,6 +63,10 @@
 
       #results {
         margin-top: 20px;
+      }
+
+      #results p {
+        text-align: left;
       }
 
       .choice {
@@ -103,6 +107,10 @@
         margin-bottom: 16px;
         font-style: italic;
       }
+
+      #quiz label {
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -129,13 +137,18 @@
             "By using the If function to set the customer value",
             "By using the If function to set the annual fee",
           ],
-          correctAnswer: 2,
+          correctAnswer: 3,
         },
         {
           question:
-            "U+ Bank wants to dynamically set the annual fee of its credit cards based on customer lifetime value. Which component do you use to implement this requirement?",
-          choices: ["Set Property", "Filter", "Group By", "Switch"],
-          correctAnswer: 1,
+            "U+ Bank offers two credit cards to its customers: the Cold Card and the Silver Card. The bank wants the annual fee property of the credit cards to be dynamic based on the customer lifetime value property. That is, customers with customer lifetime value greater than 65 receive a discount of 20% on the annual fee. \n\nAs a Strategy Designer, which component do you use to implement this requirement?",
+          choices: [
+            "Set Property",
+            "Filter",
+            "Group By",
+            "Switch",
+          ],
+          correctAnswer: 0,
         },
         {
           question:
@@ -146,62 +159,84 @@
             "filter propositions based on priority and relevance",
             "choose between a sales and a service proposition",
           ],
-          correctAnswer: 2,
+          correctAnswer: 3,
         },
         {
           question:
-            "After launching a new product, the delta mode in Visual Business Director could show _______.",
+            "After launching a new product, the delta mode in Visual Business Director could show _______________.",
           choices: [
             "the volume of the existing products",
             "the date when the product was introduced",
             "the volume difference between the new product and existing products",
             "a green shape for the product added",
           ],
-          correctAnswer: 2,
+          correctAnswer: 3,
         },
         {
           question:
-            "One of the purposes of the Interaction History decision component is to ___________.",
+            "MyCo, an electronics company, wants to recommend television brands to their customers based on incoming emails. \n\nAs a Strategy Designer working for MyCo, you create the following Next-Best-Action strategy: \n\n(Refer to Image in Question 5) \n\nIf the Email reason is Inquire LG, what does the Results of the strategy contain?",
           choices: [
-            "capture all interactions with the customer",
-            "verify if a customer is eligible for an offer",
-            "retrieve all proposition properties",
-            "determine of a proposition has been offered before",
+            "LG",
+            "Sony",
+            "Sony, LG",
+            "LG, Sony",
           ],
           correctAnswer: 0,
         },
         {
           question:
-            "When a customer is offered a proposition he has already accepted, this is because____________.",
+            "MyCo, an electronics company, wants to recommend television brands to their customers based on incoming emails. As a Strategy Designer working for MyCo, you create the following Next-Best-Action strategy: \n\n(Refer to Image in Question 6) \n\nIf the Email reason is Inquire Philips, what does the Results of the strategy contain?",
+          choices: [
+            "No offer",
+            "LG, Sony",
+            "Phillips",
+            "LG",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "One of the purposes of the Interaction History decision component is to ______________.",
+          choices: [
+            "capture all interactions with the customer",
+            "verify if a customer is eligible for an offer",
+            "retrieve all proposition properties",
+            "determine if a proposition has been offered before",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "When a customer is offered a proposition he has already accepted, this is because ______________.",
           choices: [
             "the propositions are filtered based on eligibility",
             "there is no filter for previously accepted offers in the strategy",
             "the customer intent was captured incorrectly",
             "the strategy uses interaction history to exclude previously accepted files",
           ],
-          correctAnswer: 0,
+          correctAnswer: 1,
         },
         {
           question:
-            "In a decision strategy, to remove propositions based on the current month, you use a _________.",
+            "In a decision strategy, to remove propositions based on the current month, you use a ______________.",
           choices: [
             "Calendar component",
             "Filter component",
             "date strategy property",
             "calendar strategy property",
           ],
-          correctAnswer: 0,
+          correctAnswer: 1,
         },
         {
           question:
-            'What does a solid arrow from a "Set Property" component to a "Filter" component mean?',
+            "What does a solid arrow from a \"Set Property\" component to a \"Filter\" component mean?",
           choices: [
-            'There is a one-to-one relationship between a "Set Property" and a "Filter" component.',
-            'A property from the "Set Property" component is referenced by the "Filter" component.',
-            'To evaluate the "Set Property" component, the "Filter" component is evaluated first.',
-            'Information from the "Set Property" component is copied over to the "Filter" component.',
+            "There is a one-to-one relationship between a \"Set Property\" and a \"Filter\" component.",
+            "A property from the \"Set Property\" component is referenced by the \"Filter\" component.",
+            "To evaluate the \"Set Property\" component, the \"Filter\" component is evaluated first.",
+            "Information from the \"Set Property\" component is copied over to the \"Filter\" component.",
           ],
-          correctAnswer: 1,
+          correctAnswer: 3,
         },
         {
           question:
@@ -216,7 +251,7 @@
         },
         {
           question:
-            "To run a delta report in the Visual Business Director, a minimum of two___________ are required.",
+            "To run a delta report in the Visual Business Director, a minimum of two ______________ are required.",
           choices: [
             "data sources",
             "input definitions",
@@ -227,28 +262,51 @@
         },
         {
           question:
-            "To calculate the average margin of four Propositions, you must use _____________.",
+            "U+ Bank uses a Next-Best-Action decision strategy to automatically approve credit card limit changes requested by customers. A scorecard model determines the customer credit score. \n\nThe automatic approval of credit card limits are processed based on the following criteria set by the bank: <table from 13 goes here> \n\nThe bank wants to change the threshold value for the USD 2000 credit limit from \"<175\" to \"<200\". \n\nAs a Strategy Designer, how do you implement this change?",
+          choices: [
+            "Change in the strategy the condition from \".pxSegment <=175\" to \".pxSegment <=200\".",
+            "Map the score value in the decision strategy to \"<=200\".",
+            "Change the cutoff value in the results tab of the scorecard decision component.",
+            "Change the cutoff value in the results tab of the scorecard model.",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "To calculate the average margin of four Propositions, you must use ______________.",
           choices: [
             "one Group By component",
             "four Group By components",
             "four Set Property components",
             "one Set Property component",
           ],
-          correctAnswer: 3,
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "U+ bank wants to offer a Gold Credit Card to its customers who have an annual income of more than USD 150,000.\n\nAs a Strategy Designer, how do you implement this requirement in the decision strategy?",
+          choices: [
+            "Create a When rule in the strategy",
+            "Add a proposition filter at the proposition level",
+            "Add a set property in the strategy",
+            "Create a When rule in the customer class",
+          ],
+          correctAnswer: 1,
         },
         {
           question:
             "In a strategy, how can you check if a customer rejected a proposition?",
           choices: [
-            'Check if ".pyRejected" value is equal to "True".',
-            'Check if ".pyOutcome" value is equal to "Rejected".',
-            'Check if ".pyResponse" value is equal to "Rejected".',
-            'Check if ".pyResult" value is equal to "Rejected".',
+            "Check if \".pyRejected\" value is equal to \"True\"",
+            "Check if \".pyOutcome\" value is equal to \"Rejected\"",
+            "Check if \".pyResponse\" value is equal to \"Rejected\"",
+            "Check if \".pyResult\" value is equal to \"Rejected\"",
           ],
           correctAnswer: 1,
         },
         {
-          question: "The Prioritize component sorts offers in _______________.",
+          question:
+            "The Prioritize component sorts offers in ______________.",
           choices: [
             "ascending order only",
             "descending order only",
@@ -259,20 +317,33 @@
         },
         {
           question:
-            "In a strategy, the propositions are imported using a(n) _____________.",
+            "In a strategy, the propositions are imported using a(n) ______________.",
           choices: [
             "Data Import component",
             "Offer Data component",
             "Import Data component",
             "Proposition Data component",
           ],
-          correctAnswer: 0,
+          correctAnswer: 3,
         },
         {
           question:
             "What is the name of the property that is automatically recomputed for each decision component?",
-          choices: ["Order", "Propensity", "Priority", "Rank"],
-          correctAnswer: 1,
+          choices: [
+            "Order",
+            "Propensity",
+            "Priority",
+            "Rank",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "You are a Strategy Designer on a Next-Best-Action project and are responsible for designing and implementing decision strategies.\n\nSelect each component on the left and drag it to the correct requirement on the right.",
+          choices: [
+            "Add dynamic pricing --> SET\nDefine Eligibility Criteria --> Filter\nCompute Sum of profit --> Group By\nSelect a relevant proposition --> Switch\nClick Any Line to Continue",
+          ],
+          correctAnswer: 0,
         },
         {
           question:
@@ -287,25 +358,25 @@
         },
         {
           question:
-            "To access a property from an unconnected component, you use the ____________.",
+            "To access a property from an unconnected component, you use the ______________.",
           choices: [
             "dot-property value directly",
             "component-dot-property construct",
             "property value",
             "customer dot-property construct",
           ],
-          correctAnswer: 2,
+          correctAnswer: 1,
         },
         {
           question:
-            "U+ Bank a Next-Best-Action decision strategy to determine the credit rating of its customers. A scorecard model determines the customer credit score.The business requirement is to determine the credit card rating based on the following table:\n\nAge          Credit Score          Credit Rating\n<18          100                        3\n>18          150                        2\n>25          200                        1\n\nAs a Strategy Designer, how do you implement the business requirement?",
+            "U+ Bank a Next-Best-Action decision strategy to determine the credit rating of its customers. A scorecard model determines the customer credit score.\n\nThe business requirement is to determine the credit card rating based on the following table:\n\nAge --- Credit Score --- Credit Rating\n<18 --- 100 --- 3\n>18 --- 150 --- 2\n>25 --- 200 --- 1\n\nAs a Strategy Designer, how do you implement the business requirement?",
           choices: [
             "Configure the scorecard model to pass the credit score to the strategy",
             "Add a decision table to the strategy and configure it to reference the scorecard model",
             "Add a decision table to the strategy and pass the credit score as the parameter",
             "Add the credit rating rules in the Results tab of the scorecard component",
           ],
-          correctAnswer: 1,
+          correctAnswer: 2,
         },
         {
           question:
@@ -319,56 +390,60 @@
           correctAnswer: 2,
         },
         {
-          question: "Visual Business Director can be used to __________.",
-          choices: [
-            "import an inspect an external dataset",
-            "compare two datasets",
-            "predict customer behavior",
-            "inspect interactions of a single customer",
-          ],
-          correctAnswer: 3,
-        },
-        {
           question:
-            "The number of results returned by an Interaction History component can be narrowed down based on _______________.",
+            "As a Strategy Designer, you are setting up the proposition hierarchy for MyCo. Select the correct proposition hierarchy level for each of the hierarchy items identified.",
           choices: [
-            "the customer lifetime value",
-            "the age of the customer",
-            "a time period",
-            "the total count of propositions in a given channel",
-          ],
-          correctAnswer: 2,
-        },
-        {
-          question:
-            "U+ Bank purchased Pega Customer Decision Hub to enhance the customer experience in their branches. The new application they have built has a Next-Best-Action panel to guide the branch advisor. \n\nWhen does the Next-Best-Action panel for the branch advisor need to be refreshed during the conversation with the customer?",
-          choices: [
-            "Every time new information about the customer is received",
-            "Once, after the customer reason to visit the branch is captured in the system",
-            "Every second to ensure timely recommendations",
-            "First time, after looking up the customer in the system to ensure consistency during the visit",
-          ],
-          correctAnswer: 3,
-        },
-        {
-          question:
-            "To which types of decisions can Customer Decision Hub be applied?",
-          choices: [
-            "Determining why response rates for a campaign in one region are below average",
-            "Determining how to optimize the product portfolio to increase market share",
-            "Determining how to retain a customer and what budget we should spend",
-            "Determining the cause of a customer's problem",
+            "Review the diagram for Question 25 in 11AAfile.pdf then click to continue.",
           ],
           correctAnswer: 0,
         },
         {
           question:
-            "A mobile company wants to introduce new data plans to target students. As a strategy designer, you create new data plan offers. \n\nWhich offer attribute do you need to set to make the offer available in the contact center?",
-          choices: ["Evidence", "KeyCode", "Channel", "Active"],
-          correctAnswer: 3,
+            "You are a company with a new and unique product, and you would like to offer it to the right customer.\n\nGiven the scenario, which is the most effective rule type?\n\nNote: B (or C) is correct. Conflicting answers in document.",
+          choices: [
+            "Predictive Model",
+            "Adaptive Model",
+            "Decision Table",
+            "Scorecard",
+          ],
+          correctAnswer: 1,
         },
         {
-          question: "Two results of an adaptive model are ________________.",
+          question:
+            "A mobile company wants to introduce new data plans to target students. As a strategy designer, you create new data plan offers.\n\nWhich offer attribute do you need to set to make the offer available in the contact center?",
+          choices: [
+            "KeyCode",
+            "Active",
+            "Channel",
+            "Evidence",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Designing the Next-Best-Action strategy that drives AI-powered one-to-one Customer Engagement is a staged process. Each stage refines the proposition selection process.\n\nReview this Drag and Drop Question 28 in the document.",
+          choices: [
+            "Click Here to continue",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "MyCo, a telecom company, has introduced 1GB and 3GB data plans in one of their stores and on the website. MyCo decides to use adaptive models for both offers.\n\nAs a Strategy Designer, you are interested in how the models are performing in different channels.\n\nWhich three tasks could you perform? (Choose Three)",
+          choices: [
+            "Check the performance of the 3GB data plan for the last month.",
+            "Execute a simulation in Visual Business Designer and compare, in delta mode, the performance difference between the 1GB and 3GB data plans.",
+            "Change the decision strategy because the performance in the web and store differs significantly.",
+            "Identify the models that are performing well or poorly in the store channel.",
+            "Examine the active and inactive predictors for the 1GB data plan model.",
+            "The FIRST, FOURTH and FIFTH answers are CORRECT.",
+
+          ],
+          correctAnswer: 5,
+        },
+        {
+          question:
+            "Two results of an adaptive model are _______________.",
           choices: [
             "Priority and Evidence",
             "Propensity and Rank",
@@ -389,23 +464,30 @@
           correctAnswer: 0,
         },
         {
-          question: "Which value is output by an Adaptive Model?",
-          choices: ["Score", "Behavior", "Performance", "Lift"],
+          question:
+            "Which value is output by an Adaptive Model?",
+          choices: [
+            "Score",
+            "Behavior",
+            "Performance",
+            "Lift",
+          ],
           correctAnswer: 2,
         },
         {
           question:
-            "In order to associate an Adaptive Model with each proposition, you need to ____________.",
+            "In order to associate an Adaptive Model with each proposition, you need to ______________.",
           choices: [
             "link all propositions with an Adaptive Model decision component",
             "create an Adaptive Model rule for each proposition",
-            "capture the customer's response",
+            "capture the customers response",
             "define the Adaptive Model instances in Adaptive Decision Manager",
           ],
           correctAnswer: 3,
         },
         {
-          question: "An adaptive model captures outcomes of ____________.",
+          question:
+            "An adaptive model captures outcomes of ______________.",
           choices: [
             "only negative customer responses",
             "similar propositions",
@@ -416,18 +498,287 @@
         },
         {
           question:
-            "A company wants to capture the sentiment of relevant Twitter messages to allow its customer service representatives to concentrate only on the negative ones.\n\nSentiment refers to the general attitude of the author towards a subject and can be ___________.",
-          choices: ["Defensive", "Absent", "Positive", "Offensive"],
+            "A company wants to capture the sentiment of relevant Twitter messages to allow its customer service representatives to concentrate only on the negative ones. Sentiment refers to the general attitude of the author towards a subject and can be _______________.",
+          choices: [
+            "Defensive",
+            "Absent",
+            "Positive",
+            "Offensive",
+          ],
           correctAnswer: 2,
         },
         {
           question:
-            "Which is the most accurate description of proactive retention? Proactive Retention ___________.",
+            "Which is the most accurate description of proactive retention? Proactive Retention ______________.",
           choices: [
             "anticipates potential customer churn",
             "simplifies the process of retaining customers",
             "enables business to respond to customers when they contact a call center",
             "enables the business to reduce the number of credit risk customers",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "U+ Bank is using adaptive models to offer credit cards and mortgages on two inbound channels: website and contact center. The system architect created an adaptive model configuration, Standard Kerning, which you use in the following decision category:\n\nReview DIAGRAM in Question 37 of the Document. Answer: 30\n\nU+ Bank goes live with 10 types of credit cards and five types of mortgages on their website and in five contact centers.\n\nWhat is the maximum number of adaptive models you can expect to see in the model overview report?",
+          choices: [
+            "20",
+            "15",
+            "30",
+            "75",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "A legal firm wants to use text analytics for easier and faster access to information to help with compliance related issues. The legal firm needs a taxonomy on legal concepts.\n\nWhat is a taxonomy?",
+          choices: [
+            "A sentiment analysis model",
+            "The output of an expert survey",
+            "A list of valid categories",
+            "A list of business rules",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "To which property is the output of a Predictive Model Markup Language (PMML) model automatically mapped?",
+          choices: [
+            "pxOutcome",
+            "pxResult",
+            "pxPMMLOutput",
+            "pxSegment",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Which Predictive Model Markup Language (PMML) model type is supported by Pega?",
+          choices: [
+            "Adaptive Model",
+            "Scorecard",
+            "Decision Table",
+            "PMML Model",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "A telecom company is interested in improving customer engagement on social media. However, there are hundreds of relevant messages posted on Twitter every day, and it is not practical for customer service representatives (CSRs) to review and respond to all messages. Instead, CSRs should focus on negative messages.\n\nWhat do you need to analyze the incoming messages?",
+          choices: [
+            "A text analyzer",
+            "A text outcome filed",
+            "An adaptive model for each negative response",
+            "Historical data to build a predictive model",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Visual Business Director can be used to ________________.",
+          choices: [
+            "import an inspect an external dataset",
+            "compare two datasets",
+            "predict customer behavior",
+            "inspect interactions of a single customer",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "The number of results returned by an Interaction History component can be narrowed down based on _______________.",
+          choices: [
+            "the customer lifetime value",
+            "the age of the customer",
+            "a time period",
+            "the total count of propositions in a given channel",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "U+ Bank purchased Pega Customer Decision Hub to enhance the customer experience in their branches. The new application they have built has a Next-Best-Action panel to guide the branch advisor.\n\nWhen does the Next-Best-Action panel for the branch advisor need to be refreshed during the conversation with the customer?",
+          choices: [
+            "Every time new information about the customer is received",
+            "Once, after the customer reason to visit the branch is captured in the system",
+            "Every second to ensure timely recommendations",
+            "First time, after looking up the customer in the system to ensure consistency during the visit",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "To which types of decisions can Customer Decision Hub be applied?",
+          choices: [
+            "Determining why response rates for a campaign in one region are below average",
+            "Determining how to optimize the product portfolio to increase market share",
+            "Determining how to retain a customer and what budget we should spend",
+            "Determining the cause of a customer's problem",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "Pega Customer Decision Hub enables organizations to make Next-Best decisions.\n\nTo which type of a decision is Next-Best-Action applied?",
+          choices: [
+            "Optimizing supply chain management",
+            "Determining if a borrower gets a loan",
+            "Predicting the time of a machine failure",
+            "Determining how to optimize inventories",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "A customer's propensity to accept a proposition increases when _______________.",
+          choices: [
+            "the proposition was rejected by similar customers",
+            "similar propositions were rejected by the customer",
+            "similar propositions were accepted by the customer",
+            "the proposition was accepted by similar customers",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "To create channel-specific Adaptive Model instances, you ______________.",
+          choices: [
+            "set channel information in the strategy",
+            "set the channel option in the Adaptive Model component",
+            "do nothing; Adaptive Model instances are always channel specific",
+            "create channel specific Adaptive Model definition",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "What is the key difference between a predictive model and human expert?",
+          choices: [
+            "Predictive models are more capable of detecting patterns in historical data.",
+            "Humans are better at dealing with structured data and identifying patterns.",
+            "Humans make successful predictions on a large amount of data.",
+            "Predictive models always outperform human experts.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "In Pega Customer Decision Hub, you can save a regression model as a _______________.",
+          choices: [
+            "Predictive model rule",
+            "Scorecard rule",
+            "Decision Tree rule",
+            "Regression Model rule",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "U+, a telecom company, introduces fiber optic in the North region of the country. They want to advertise this on their website using a banner and targeting the customers living in that area.\n\nWhen configuring Next-Best-Action designer, which targeting approach should the company select?",
+          choices: [
+            "Proposition driven",
+            "Audience driven",
+            "Eligibility driven",
+            "Analytics driven",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "U+ Bank wants to use Pega Marketing, powered by Pega Customer Decision Hub, to drive sales by displaying the most relevant message to its customers. As a first step, U+ Bank has decided to leverage its website as a marketing channel. The management wants to evaluate how successful the customer engagement is in the web channel.\n\nAs a Strategy Designer what must you configure in the Next-Best-Action designer to achieve this requirement?",
+          choices: [
+            "Total volume KPI",
+            "Web Click Through Rate KPI",
+            "Prioritization strategy",
+            "Interaction history report",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "You are the Decisioning Consultant on an AI-powered one-to-one Customer Engagement implementation project. You are asked to design the Next-Best-Action prioritization expression that balances the customer needs with the business objectives.\n\nWhat factor do you consider in the prioritization expression?",
+          choices: [
+            "offer relevancy",
+            "customer contact policy",
+            "predicted customer behavior",
+            "offer eligibility",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "As a Strategy Designer, you have created two business issues (Sales and Retention) and a proposition group hierarchy for a mobile company, MyCo. You also defined propositions in the various business issues and groups.\n\nIn a strategy defined in the \"Retention\" issue and the \"X-Sell\" group, you can import ______________.",
+          choices: [
+            "propositions from \"X-Sell\" group",
+            "all propositions defined",
+            "propositions from all groups under the \"Retention\" issue",
+            "propositions from the Sales issue",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "U+ Bank has configured Next-Best-Action designer to display marketing offers to its customers on the U+ Bank website.\n\nThe bank would like to display different offers to different customers based on relevancy and eligibility defined by the business. The Strategy Designer has decided to use the \"Offer targeting using audiences and AI\" method to implement this requirement.\n\nWhich three tasks need to be performed to implement this requirement? (Choose Three)",
+          choices: [
+            "Configure conditions for offer eligibility",
+            "Configure an audience",
+            "Configure an alternate strategy",
+            "Configure a prioritization strategy",
+            "Select a relevancy strategy",
+            "The FIRST, FOURTH and FIFTH answers should be Selected",
+          ],
+          correctAnswer: 5,
+        },
+        {
+          question:
+            "MyCo, a mobile company, uses Pega Marketing, powered by Pega Customer Decision Hub, to display marketing offers to its customers on its website. The company would like to display more relevant offers to customers based on customer behavior. The following is the proposition hierarchy in the Next-Best-Action Designer.\n\n(View diagram on Question 56 of Document)\n\nBoth the groups are configured with a relevancy strategy and eligibility criteria. The company would like to arbitrate across the offers in the two groups and select the best offer based on customer behavior.\n\nTo meet this business requirement, at which level should the Strategy Designer configure the proposition prioritization strategy?",
+          choices: [
+            "Eligibility-level",
+            "Group-level",
+            "Issue-level",
+            "Proposition-level",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "MyCo, a mobile company, uses Pega Marketing, powered by Pega Customer Decision Hub, to display marketing offers to its customers on its website. The company would like to display more relevant offers to customers based on customer behavior. The following is the proposition hierarchy in the Next-Best-Action Designer.\n\n(Refer to diagram on Question 57 of Document)\n\nBoth the groups are configured with a relevancy strategy and eligibility criteria. The company would like to arbitrate across the offers in the two groups and select the best offer based on customer behavior.\n\nAs a Strategy Designer, what must you configure in order to meet this requirement?",
+          choices: [
+            "Prioritization strategy",
+            "Propensity at the group level",
+            "Metrics of the adaptive model",
+            "Target audience",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "In a decision strategy, which decision component filters relevant offers and prioritizes these offers?",
+          choices: [
+            "Switch component",
+            "Prioritize component",
+            "Filter component",
+            "Group By component",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "U+ Bank has launched a new credit card for all customers with a premium bank account. As a Strategy Designer, you need to create propositions that involve the full customer life cycle: marketing, sales, and service. Which two valid propositions do you create? (Choose Two)",
+          choices: [
+            "Credit card number",
+            "Credit card Status",
+            "No annual fee",
+            "Address Change",
+            "Answers THREE and FOUR are correct"
+          ],
+          correctAnswer: 4,
+        },
+        {
+          question:
+            "A financial institution wants to offer a new exclusive credit card to customers who have spent over USD 1000 in the last six months and have not received an offer for another card. Put the components in the correct order to accomplish this task.\n\nCorrect Order:\n\nInteraction History\nGroup by\nFilter\nResults",
+          choices: [
+            "Click to Continue",
           ],
           correctAnswer: 0,
         },
